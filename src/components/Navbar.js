@@ -9,21 +9,20 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
+      const sections = document.querySelectorAll('section');
+      const scrollPosition = window.scrollY + window.innerHeight / 2; // Adjust this value based on your offset
+
+      sections.forEach(section => {
+        if (scrollPosition >= section.offsetTop && scrollPosition < section.offsetTop + section.offsetHeight) {
+          setActiveSection(section.getAttribute('id'));
+        }
+      });
+
       if (window.scrollY >= 50) {
         setScrollHeader(true);
       } else {
         setScrollHeader(false);
       }
-
-      const sections = document.querySelectorAll('section');
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-
-        if (window.scrollY >= sectionTop - 70 && window.scrollY < sectionTop + sectionHeight - 70) {
-          setActiveSection(section.getAttribute('id'));
-        }
-      });
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -48,7 +47,7 @@ const Navbar = () => {
               className={`nav__link ${activeSection === 'home' ? 'active-link' : ''}`}
               spy={true}
               smooth={true}
-              offset={-60}
+              offset={-70}
               duration={500}
             >
               <i className='bx bxs-home-alt-2'></i>
@@ -61,7 +60,7 @@ const Navbar = () => {
               className={`nav__link ${activeSection === 'about' ? 'active-link' : ''}`}
               spy={true}
               smooth={true}
-              offset={-60}
+              offset={-70}
               duration={500}
             >
               <i className='bx bx-info-circle'></i>
@@ -74,7 +73,7 @@ const Navbar = () => {
               className={`nav__link ${activeSection === 'residences' ? 'active-link' : ''}`}
               spy={true}
               smooth={true}
-              offset={-60}
+              offset={-70}
               duration={500}
             >
               <i className='bx bx-building-house'></i>
@@ -87,7 +86,7 @@ const Navbar = () => {
               className={`nav__link ${activeSection === 'contact' ? 'active-link' : ''}`}
               spy={true}
               smooth={true}
-              offset={-60}
+              offset={-70}
               duration={500}
             >
               <i className='bx bxs-phone'></i>
